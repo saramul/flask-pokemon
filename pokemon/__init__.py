@@ -22,4 +22,8 @@ def create_app():
   app.register_blueprint(user_bp, url_prefix='/users')
   app.register_blueprint(pokedex_bp, url_prefix='/pokedex')
 
+  login_manager.login_view = 'users.login'
+  login_manager.login_message = 'Please log in to access this page'
+  login_manager.login_message_category = 'warning'
+
   return app
