@@ -6,12 +6,14 @@ from pokemon.models import Pokemon, PokemonType
 pokedex_bp = Blueprint('pokedex', __name__, template_folder='templates')
 
 @pokedex_bp.route('/')
+@login_required
 def index():
   query = db.select(Pokemon)
   pokemons = db.session.scalars(query).all()
   return render_template('pokedex/index.html', title='Pokedex Page', pokemons=pokemons)
 
 @pokedex_bp.route('/new', methods=['GET', 'POST'])
+@login_required
 def new_pokemon():
   query = db.select(PokemonType)
   pokemon_types = db.session.scalars(query).all()
